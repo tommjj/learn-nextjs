@@ -11,7 +11,11 @@ export async function authenticate(
     formData: FormData
 ) {
     try {
-        await signIn('credentials', Object.fromEntries(formData));
+        console.log(formData);
+        await signIn('credentials', {
+            email: formData.get('email'),
+            password: formData.get('password'),
+        });
     } catch (error) {
         if ((error as Error).message.includes('CredentialsSignin')) {
             return 'CredentialSignin';
